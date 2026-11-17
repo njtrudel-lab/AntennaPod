@@ -750,6 +750,7 @@ public class FeedItemlistFragment extends Fragment implements AdapterView.OnItem
 
         @Override
         protected void afterBindViewHolder(EpisodeItemViewHolder holder, int pos) {
+            holder.feedTitle.setVisibility(View.GONE); // AntennaPod+: would just repeat the page header
             holder.coverHolder.setVisibility(View.VISIBLE);
             new CoverLoader()
                     .withUri(holder.getFeedItem().getImageLocation()) // Ignore "Show episode cover" setting

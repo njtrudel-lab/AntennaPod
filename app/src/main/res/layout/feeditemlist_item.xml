@@ -90,6 +90,16 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <!-- AntennaPod+: podcast name on the top line, above the date/size row. Same (regular)
+                 weight as the episode title, a size smaller, gray. Hidden on the podcast's own page. -->
+            <TextView
+                android:id="@+id/txtvFeedTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                style="@style/AntennaPod.TextView.ListItemSecondaryTitle"
+                tools:text="@sample/episodes.json/data/title" />
+
             <LinearLayout
                 android:id="@+id/status"
                 android:layout_width="match_parent"

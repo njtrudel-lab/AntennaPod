@@ -164,6 +164,13 @@ public class SearchFragment extends Fragment implements EpisodeItemListAdapter.O
             }
 
             @Override
+            protected void afterBindViewHolder(EpisodeItemViewHolder holder, int pos) {
+                if (getArguments().getLong(ARG_FEED, 0) != 0) {
+                    holder.feedTitle.setVisibility(View.GONE); // AntennaPod+: searching within one podcast
+                }
+            }
+
+            @Override
             protected void onSelectedItemsUpdated() {
                 super.onSelectedItemsUpdated();
                 FeedItemMenuHandler.onPrepareMenu(floatingSelectMenu.getMenu(), getSelectedItems(),

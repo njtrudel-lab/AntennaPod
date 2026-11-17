@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 import de.danoeh.antennapod.R;
 import de.danoeh.antennapod.model.feed.Feed;
@@ -44,6 +46,7 @@ public class EpisodeItemViewHolder extends RecyclerView.ViewHolder {
     public final TextView placeholder;
     public final ImageView cover;
     private final TextView title;
+    public final TextView feedTitle;
     private final TextView pubDate;
     private final TextView position;
     private final TextView duration;
@@ -72,6 +75,7 @@ public class EpisodeItemViewHolder extends RecyclerView.ViewHolder {
         cover = itemView.findViewById(R.id.imgvCover);
         title = itemView.findViewById(R.id.txtvTitle);
         title.setHyphenationFrequency(Layout.HYPHENATION_FREQUENCY_FULL);
+        feedTitle = itemView.findViewById(R.id.txtvFeedTitle);
         pubDate = itemView.findViewById(R.id.txtvPubDate);
         position = itemView.findViewById(R.id.txtvPosition);
         duration = itemView.findViewById(R.id.txtvDuration);
@@ -94,6 +98,10 @@ public class EpisodeItemViewHolder extends RecyclerView.ViewHolder {
         this.item = item;
         placeholder.setText(item.getFeed().getTitle());
         title.setText(item.getTitle());
+        // Reset on every bind: holders are recycled across lists, and the podcast's own page hides this.
+        String podcastName = item.getFeed().getTitle();
+        feedTitle.setText(podcastName);
+        feedTitle.setVisibility(StringUtils.isEmpty(podcastName) ? View.GONE : View.VISIBLE);
         if (item.isPlayed()) {
             leftPadding.setContentDescription(item.getTitle() + ". " + activity.getString(R.string.is_played));
         } else {
@@ -203,6 +211,8 @@ public class EpisodeItemViewHolder extends RecyclerView.ViewHolder {
         isFavorite.setVisibility(View.GONE);
         isInQueue.setVisibility(View.GONE);
         title.setText("███████");
+        feedTitle.setText("█████");
+        feedTitle.setVisibility(View.VISIBLE);
         pubDate.setText("████");
         duration.setText("████");
         secondaryActionProgress.setPercentage(0, null);
