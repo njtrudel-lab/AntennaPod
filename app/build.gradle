@@ -31,9 +31,14 @@ android {
         debug {
             applicationIdSuffix ".debug"
             resValue "string", "provider_authority", "de.danoeh.antennapod.debug.provider"
+            resValue "string", "app_name", "AntennaPod+ Debug" // AntennaPod+ personal build
         }
         release {
-            resValue "string", "provider_authority", "de.danoeh.antennapod.provider"
+            // AntennaPod+ personal build: own app ID, provider authority and name, so it installs
+            // alongside the official app (two apps can't share an ID or a content-provider authority).
+            applicationIdSuffix ".plus"
+            resValue "string", "provider_authority", "de.danoeh.antennapod.plus.provider"
+            resValue "string", "app_name", "AntennaPod+"
             minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.releaseConfig
